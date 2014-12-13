@@ -35,6 +35,7 @@ namespace OpenTrack.WindowsPhone
         private void RegisterServices()
         {
             _container.PerRequest<SensorReadingService>();
+            _container.PerRequest<OpenTrackService>();
         }
 
         protected override void PrepareViewFirst(Frame rootFrame)

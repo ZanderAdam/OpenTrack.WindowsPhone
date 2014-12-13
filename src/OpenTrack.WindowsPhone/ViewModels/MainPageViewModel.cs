@@ -8,7 +8,7 @@ namespace OpenTrack.WindowsPhone.ViewModels
 {
     public class MainPageViewModel : PropertyChangedBase
     {
-        private readonly SensorReadingService _sensorReadingService;
+        private readonly OpenTrackService _openTrackService;
         private bool _isInputEnabled = true;
         private bool _isPolling;
         private string _openTrackIp;
@@ -106,10 +106,10 @@ namespace OpenTrack.WindowsPhone.ViewModels
             }
         }
 
-        public MainPageViewModel(SensorReadingService sensorReadingService)
+        public MainPageViewModel(OpenTrackService openTrackService)
         {
-            _sensorReadingService = sensorReadingService;
-            _sensorReadingService.NewReadingEvent += NewReadingEvent;
+            _openTrackService = openTrackService;
+            _openTrackService.NewReadingEvent += NewReadingEvent;
         }
 
         private void NewReadingEvent(InclinometerReading reading)
@@ -125,7 +125,7 @@ namespace OpenTrack.WindowsPhone.ViewModels
             IsInputEnabled = false;
             IsPolling = true;
 
-            _sensorReadingService.StartReading(RefreshRate);
+            _openTrackService.Start(OpenTrackIp, OpenTrackPort, RefreshRate);
         }
 
 
@@ -134,7 +134,7 @@ namespace OpenTrack.WindowsPhone.ViewModels
             IsInputEnabled = true;
             IsPolling = false;
 
-            _sensorReadingService.StopReading();
+            _openTrackService.Stop();
         }
 
         public bool CanStartPolling
