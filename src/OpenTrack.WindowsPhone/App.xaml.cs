@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Controls;
 using Caliburn.Micro;
+using OpenTrack.WindowsPhone.Services;
 using OpenTrack.WindowsPhone.ViewModels;
 using OpenTrack.WindowsPhone.Views;
 
@@ -21,7 +22,19 @@ namespace OpenTrack.WindowsPhone
         {
             _container = new WinRTContainer();
             _container.RegisterWinRTServices();
+
+            RegisterViewModels();
+            RegisterServices();
+        }
+
+        private void RegisterViewModels()
+        {
             _container.PerRequest<MainPageViewModel>();
+        }
+
+        private void RegisterServices()
+        {
+            _container.PerRequest<SensorReadingService>();
         }
 
         protected override void PrepareViewFirst(Frame rootFrame)
