@@ -82,6 +82,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Providers\SettingsProvider.cs" />
     <Compile Include="Services\OpenTrackService.cs" />
     <Compile Include="Services\SensorReadingService.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />

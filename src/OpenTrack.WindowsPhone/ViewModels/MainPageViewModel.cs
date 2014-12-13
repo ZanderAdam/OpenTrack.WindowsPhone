@@ -2,6 +2,7 @@
 using Windows.Devices.Sensors;
 using Windows.UI.Xaml;
 using Caliburn.Micro;
+using OpenTrack.WindowsPhone.Providers;
 using OpenTrack.WindowsPhone.Services;
 
 namespace OpenTrack.WindowsPhone.ViewModels
@@ -9,6 +10,7 @@ namespace OpenTrack.WindowsPhone.ViewModels
     public class MainPageViewModel : PropertyChangedBase
     {
         private readonly OpenTrackService _openTrackService;
+        private readonly SettingsProvider _settingsProvider;
         private bool _isInputEnabled = true;
         private bool _isPolling;
         private string _openTrackIp;
@@ -106,10 +108,13 @@ namespace OpenTrack.WindowsPhone.ViewModels
             }
         }
 
-        public MainPageViewModel(OpenTrackService openTrackService)
+        public MainPageViewModel(OpenTrackService openTrackService, SettingsProvider settingsProvider)
         {
             _openTrackService = openTrackService;
+            _settingsProvider = settingsProvider;
             _openTrackService.NewReadingEvent += NewReadingEvent;
+
+            ReadSettings();
         }
 
         private void NewReadingEvent(InclinometerReading reading)
@@ -126,6 +131,8 @@ namespace OpenTrack.WindowsPhone.ViewModels
             IsPolling = true;
 
             _openTrackService.Start(OpenTrackIp, OpenTrackPort, RefreshRate);
+
+            SaveSettings();
         }
 
 
@@ -150,6 +157,20 @@ namespace OpenTrack.WindowsPhone.ViewModels
         public bool CanEndPolling
         {
             get { return IsPolling; }
+        }
+
+        private void ReadSettings()
+        {
+            OpenTrackIp = _settingsProvider.OpenTrackIp;
+            OpenTrackPort = _settingsProvider.OpenTrackPort;
+            RefreshRate = _settingsProvider.RefreshRate;
+        }
+
+        private void SaveSettings()
+        {
+            _settingsProvider.OpenTrackIp = OpenTrackIp;
+            _settingsProvider.OpenTrackPort = OpenTrackPort;
+            _settingsProvider.RefreshRate = RefreshRate;
         }
     }
 }
