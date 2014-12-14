@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Activation;
+using Windows.System.Display;
 using Windows.UI.Xaml.Controls;
 using Caliburn.Micro;
 using OpenTrack.WindowsPhone.Providers;
@@ -13,10 +14,16 @@ namespace OpenTrack.WindowsPhone
     public sealed partial class App
     {
         private WinRTContainer _container;
+        private DisplayRequest _displayRequest;
 
         public App()
         {
             InitializeComponent();
+
+            //Hack to keep Device from Sleeping.
+            //Otherwise headtracking stops. 
+            _displayRequest = new Windows.System.Display.DisplayRequest();
+            _displayRequest.RequestActive();
         }
 
         protected override void Configure()
