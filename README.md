@@ -50,8 +50,7 @@ Remapping Options
 ###Install Windows Phone App
 
 1. Download Windows Phone App and install:
-  - [Latest Development Versions](https://github.com/ZanderAdam/OpenTrack.WindowsPhone/releases)
-  - Stable Version - Coming soon to Windows Store Near you!
+  - [Stable Version](http://www.windowsphone.com/en-us/store/app/opentrack-head-tracking/1c604f32-6d68-40ef-aa44-3163e30f547f)
 		
 2. Start the App and enter your machine Ip Adress, the OpenTrack UDP port and Refresh Rate
 3. Click `Start` to start broadcasting messages to OpenTrack
