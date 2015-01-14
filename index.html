@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Opentrack.windowsphone by ZanderAdam</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Opentrack.windowsphone</h1>
+        <h2>OpenTrack head tracking using Windows Phone 8.1</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/ZanderAdam/OpenTrack.WindowsPhone/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/ZanderAdam/OpenTrack.WindowsPhone/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/ZanderAdam/OpenTrack.WindowsPhone" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="opentrack-head-tracking-using-windows-phone" class="anchor" href="#opentrack-head-tracking-using-windows-phone" aria-hidden="true"><span class="octicon octicon-link"></span></a>OpenTrack Head Tracking using Windows Phone</h1>
+
+<p>Based on the Android Implementation:</p>
+
+<p><a href="https://github.com/opentrack/opentrack/wiki/Smartphone-Headtracking">https://github.com/opentrack/opentrack/wiki/Smartphone-Headtracking</a></p>
+
+<p>This uses OpenTrack UDP instead of FreePie UDP</p>
+
+<hr>
+
+<h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<ul>
+<li>Windows Phone 8.1 in *Development mode</li>
+<li>Way to mount the phone on your head</li>
+</ul>
+
+<p>*Development Mode in order to install applications outside of Microsoft Store. This is only until the app is submitted to the store.</p>
+
+<h2>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h2>
+
+<h3>
+<a id="install-opentrack" class="anchor" href="#install-opentrack" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install OpenTrack</h3>
+
+<ol>
+<li>Start OpenTrack app</li>
+<li>Set Tracker to <code>UDP sender</code> and set Port to 4242 (or any other port). Remember you may need to open this port up in your firewall.</li>
+<li>Set Protocol to <code>freetrack 2.0</code>
+</li>
+<li>Configure <code>Center</code> shortcut in <code>Keys</code> option</li>
+<li>Configure Mappings as outlined below (based on Android version)</li>
+<li>Click <code>Start</code><br>
+</li>
+</ol>
+
+<p>Yaw mapping</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/4406961/5425422/47b2572a-82e4-11e4-8094-dc33017594ae.PNG" alt="yawmapping"></p>
+
+<p>Pitch mapping</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/4406961/5425424/58dee9f0-82e4-11e4-8be9-455f10effd60.PNG" alt="pitchmapping"></p>
+
+<p>Roll Mapping</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/4406961/5425429/6f837da6-82e4-11e4-850c-5c5cd37f34e7.PNG" alt="rollmapping"></p>
+
+<p>Remapping Options</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/4406961/5425431/924254ac-82e4-11e4-8d26-99fb5a19c0cb.PNG" alt="remapoptions"></p>
+
+<h3>
+<a id="install-windows-phone-app" class="anchor" href="#install-windows-phone-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install Windows Phone App</h3>
+
+<ol>
+<li>
+<p>Download Windows Phone App and install:</p>
+
+<ul>
+<li><a href="https://github.com/ZanderAdam/OpenTrack.WindowsPhone/releases">Latest Development Versions</a></li>
+<li>Stable Version - Coming soon to Windows Store Near you!</li>
+</ul>
+</li>
+<li><p>Start the App and enter your machine Ip Adress, the OpenTrack UDP port and Refresh Rate</p></li>
+<li>Click <code>Start</code> to start broadcasting messages to OpenTrack</li>
+</ol>
+
+<p><img src="https://cloud.githubusercontent.com/assets/4406961/5425611/09179c42-82ed-11e4-8867-0d440c6d5d85.png" alt="opentrack headtracking"></p>
+
+<h3>
+<a id="mounting" class="anchor" href="#mounting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mounting</h3>
+
+<p>Now its time to mount the phone on your head.  The guide on original Android post works well. </p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
