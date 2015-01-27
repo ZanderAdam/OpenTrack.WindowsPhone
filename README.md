@@ -13,10 +13,8 @@ This uses OpenTrack UDP instead of FreePie UDP
 
 Requirements
 -------------
-- Windows Phone 8.1 in *Development mode
+- Windows Phone 8.1
 - Way to mount the phone on your head
-
-*Development Mode in order to install applications outside of Microsoft Store. This is only until the app is submitted to the store.
 
 Setup
 -------------
