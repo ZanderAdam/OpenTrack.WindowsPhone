@@ -30,6 +30,9 @@
             <TextBlock Text="{Binding Pitch}" FontSize="24"/>
             <TextBlock Text="{Binding Roll}" FontSize="24"/>
             <TextBlock Text="{Binding Accuracy}" FontSize="24"/>
+            <TextBlock Text="{Binding AccelX}" FontSize="24"/>
+            <TextBlock Text="{Binding AccelY}" FontSize="24"/>
+            <TextBlock Text="{Binding AccelZ}" FontSize="24"/>
         </StackPanel>
     </StackPanel>
 </Page>

@@ -20,6 +20,9 @@ namespace OpenTrack.WindowsPhone.ViewModels
         private string _pitch;
         private string _roll;
         private string _accuracy;
+        private string _accelX;
+        private string _accelY;
+        private string _accelZ;
 
         public bool IsInputEnabled
         {
@@ -108,6 +111,33 @@ namespace OpenTrack.WindowsPhone.ViewModels
             }
         }
 
+        public string AccelX
+        {
+            get { return _accelX; }
+            set
+            {
+                _accelX = value;
+                NotifyOfPropertyChange(() => AccelX);
+            }
+        }
+        public string AccelY
+        {
+            get { return _accelY; }
+            set
+            {
+                _accelY = value;
+                NotifyOfPropertyChange(() => AccelY);
+            }
+        }
+        public string AccelZ
+        {
+            get { return _accelZ; }
+            set
+            {
+                _accelZ = value;
+                NotifyOfPropertyChange(() => AccelZ);
+            }
+        }
         public MainPageViewModel(OpenTrackService openTrackService, SettingsProvider settingsProvider)
         {
             _openTrackService = openTrackService;
@@ -117,12 +147,21 @@ namespace OpenTrack.WindowsPhone.ViewModels
             ReadSettings();
         }
 
-        private void NewReadingEvent(InclinometerReading reading)
+        private void NewReadingEvent(SensorReading sensorReading)
         {
-            Yaw = String.Format("Yaw: {0}", reading.YawDegrees);
-            Pitch = String.Format("Pitch: {0}", reading.PitchDegrees);
-            Roll = String.Format("Roll: {0}", reading.RollDegrees);
-            Accuracy = String.Format("Accuracy: {0}", reading.YawAccuracy);
+            if (sensorReading.HasInclinometer)
+            {
+                Yaw = String.Format("Yaw: {0}", sensorReading.InclinometerReading.YawDegrees);
+                Pitch = String.Format("Pitch: {0}", sensorReading.InclinometerReading.PitchDegrees);
+                Roll = String.Format("Roll: {0}", sensorReading.InclinometerReading.RollDegrees);
+                Accuracy = String.Format("Accuracy: {0}", sensorReading.InclinometerReading.YawAccuracy);
+            }
+            else
+            {
+                AccelX = String.Format("Accel X: {0}",sensorReading.AccelerometerReading.AccelerationX);
+                AccelY = String.Format("Accel Y: {0}",sensorReading.AccelerometerReading.AccelerationY);
+                AccelZ = String.Format("Accel Z: {0}", sensorReading.AccelerometerReading.AccelerationZ);
+            }
         }
 
         public void StartPolling()

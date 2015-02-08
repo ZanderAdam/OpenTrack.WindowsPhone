@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Sensors;
@@ -8,7 +9,7 @@ using Windows.UI.Xaml;
 
 namespace OpenTrack.WindowsPhone.Services
 {
-    public delegate void NewReadingEventHandler(InclinometerReading reading);
+    public delegate void NewReadingEventHandler(SensorReading reading);
 
     public class OpenTrackService
     {
@@ -48,7 +49,7 @@ namespace OpenTrack.WindowsPhone.Services
             SendMessage(newSensorReading);
         }
 
-        private async void SendMessage(InclinometerReading newSensorReading)
+        private async void SendMessage(SensorReading newSensorReading)
         {
             var socket = new DatagramSocket();
 
@@ -61,16 +62,45 @@ namespace OpenTrack.WindowsPhone.Services
             }
         }
 
-        private byte[] BuildMessage(InclinometerReading newSensorReading)
+        private byte[] BuildMessage(SensorReading newSensorReading)
+        {
+            if (newSensorReading.HasInclinometer)
+                return BuildInclinometerMessage(newSensorReading.InclinometerReading);
+
+            return BuildAccelerometerMessage(newSensorReading.AccelerometerReading);
+        }
+
+        private byte[] BuildAccelerometerMessage(AccelerometerReading accelerometerReading)
+        {
+            var x = accelerometerReading.AccelerationX;
+            var y = accelerometerReading.AccelerationY;
+            var z = accelerometerReading.AccelerationZ;
+
+            var yawDegrees = Math.Atan2(x, y)*180/Math.PI;
+            var pitchDegrees = Math.Atan2(-x, Math.Sqrt(y*y + z + z))*180/Math.PI;
+            var rollDegrees = Math.Atan2(y, z)*180/Math.PI;
+
+            return new double[]
+            {
+                0,
+                0,
+                0,
+                yawDegrees,
+                pitchDegrees,
+                rollDegrees
+            }.SelectMany(BitConverter.GetBytes).ToArray();
+        }
+
+        private byte[] BuildInclinometerMessage(InclinometerReading inclinometerReading)
         {
             return new double[]
             {
                 0,
                 0,
                 0,
-                newSensorReading.YawDegrees,
-                newSensorReading.PitchDegrees,
-                newSensorReading.RollDegrees
+                inclinometerReading.YawDegrees,
+                inclinometerReading.PitchDegrees,
+                inclinometerReading.RollDegrees
             }.SelectMany(BitConverter.GetBytes).ToArray();
         }
     }
