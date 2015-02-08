@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="fdbe3262-db7e-4149-b9db-378fb64db15c" Publisher="CN=Aleksandar" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="fdbe3262-db7e-4149-b9db-378fb64db15c" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="7768TehnikDesign.OpenTrackHeadTracking" Publisher="CN=D1182D34-C9D7-4CF8-AC0E-891BDF1CDD73" Version="1.1.0.3" />
+  <mp:PhoneIdentity PhoneProductId="ef0010ea-204a-43aa-ac5c-407865108c42" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>OpenTrack.WindowsPhone</DisplayName>
-    <PublisherDisplayName>Aleksandar</PublisherDisplayName>
+    <DisplayName>OpenTrack Head Tracking</DisplayName>
+    <PublisherDisplayName>Tehnik Design</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>
@@ -16,7 +16,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="OpenTrack.WindowsPhone.App">
-      <m3:VisualElements DisplayName="OpenTrack.WindowsPhone" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="OpenTrack.WindowsPhone" ForegroundText="light" BackgroundColor="transparent">
+      <m3:VisualElements DisplayName="OpenTrack Head Tracking" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="OpenTrack.WindowsPhone" ForegroundText="light" BackgroundColor="transparent">
         <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png">
         </m3:DefaultTile>
         <m3:SplashScreen Image="Assets\SplashScreen.png" />
