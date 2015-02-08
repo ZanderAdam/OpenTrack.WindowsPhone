@@ -13,7 +13,7 @@ This uses OpenTrack UDP instead of FreePie UDP
 
 Requirements
 -------------
-- Windows Phone 8.1
+- Windows Phone 8.1 with **Gyroscope**
 - Way to mount the phone on your head
 
 Setup
