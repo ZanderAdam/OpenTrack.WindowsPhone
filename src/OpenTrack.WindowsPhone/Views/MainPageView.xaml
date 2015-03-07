@@ -7,6 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:micro="using:Caliburn.Micro"
+    xmlns:interop="using:Windows.UI.Xaml.Interop"
+    xmlns:sys="using:System"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
     </Page.Resources>
@@ -21,6 +23,9 @@
 
         <TextBlock Text="Refresh Rate (ms) - Default 100"/>
         <TextBox x:Name="Settings_RefreshRate"  InputScope="Number" IsEnabled="{Binding IsInputEnabled}"/>
+
+        <TextBlock Text="Data Source"/>
+        <ComboBox x:Name="Settings_SensorType" SelectedValuePath="Tag" IsEnabled="{Binding IsInputEnabled}"/>
 
         <Button Content="Start" HorizontalAlignment="Stretch" x:Name="StartPolling"/>
         <Button Content="Stop" HorizontalAlignment="Stretch" x:Name="EndPolling"/>

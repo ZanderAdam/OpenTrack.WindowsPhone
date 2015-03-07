@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Caliburn.Micro;
 using OpenTrack.WindowsPhone.Providers;
+using OpenTrack.WindowsPhone.Services.SensorReaders;
 
 namespace OpenTrack.WindowsPhone.ViewModels
 {
@@ -10,6 +13,7 @@ namespace OpenTrack.WindowsPhone.ViewModels
         private string _openTrackIp;
         private string _openTrackPort;
         private int _refreshRate = 20;
+        private SensorReaderType _selectedSensorType;
 
         public SettingsViewModel(SettingsProvider settingsProvider)
         {
@@ -47,11 +51,30 @@ namespace OpenTrack.WindowsPhone.ViewModels
             }
         }
 
+        public IEnumerable<SensorReaderType> SensorType
+        {
+            get
+            {
+                return Enum.GetValues(typeof(SensorReaderType)).Cast<SensorReaderType>();
+            }
+        }
+
+        public SensorReaderType SelectedSensorType
+        {
+            get { return _selectedSensorType; }
+            set
+            {
+                _selectedSensorType = value; 
+                NotifyOfPropertyChange(() => SelectedSensorType);
+            }
+        }
+
         public void ReadSettings()
         {
             OpenTrackIp = _settingsProvider.OpenTrackIp;
             OpenTrackPort = _settingsProvider.OpenTrackPort;
             RefreshRate = _settingsProvider.RefreshRate;
+            SelectedSensorType = _settingsProvider.SensorType;
         }
 
         public void Save()
@@ -59,6 +82,7 @@ namespace OpenTrack.WindowsPhone.ViewModels
             _settingsProvider.OpenTrackIp = OpenTrackIp;
             _settingsProvider.OpenTrackPort = OpenTrackPort;
             _settingsProvider.RefreshRate = RefreshRate;
+            _settingsProvider.SensorType = SelectedSensorType;
         }
     }
 }

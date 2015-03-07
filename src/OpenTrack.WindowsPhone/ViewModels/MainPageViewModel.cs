@@ -117,7 +117,7 @@ namespace OpenTrack.WindowsPhone.ViewModels
         {
             EnableInterface(false);
 
-            _openTrackService.Start(Settings.OpenTrackIp, Settings.OpenTrackPort, Settings.RefreshRate, SensorReaderType.Gyroscope);
+            _openTrackService.Start(Settings.OpenTrackIp, Settings.OpenTrackPort, Settings.RefreshRate, Settings.SelectedSensorType);
 
             Settings.Save();
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using OpenTrack.WindowsPhone.Services.SensorReaders;
 
 namespace OpenTrack.WindowsPhone.Providers
 {
@@ -24,6 +25,18 @@ namespace OpenTrack.WindowsPhone.Providers
         {
             get { return GetIntValue("RefreshRate"); }
             set { ApplicationData.Current.LocalSettings.Values["RefreshRate"] = value; }
+        }
+        public SensorReaderType SensorType
+        {
+            get { return GetEnumValue<SensorReaderType>("SensorType"); }
+            set { ApplicationData.Current.LocalSettings.Values["SensorType"] = value.ToString(); }
+        }
+
+        private T GetEnumValue<T>(string key) where T : struct
+        {
+            if (ApplicationData.Current.LocalSettings.Values.ContainsKey(key))
+                return (T) Enum.Parse(typeof (T), ApplicationData.Current.LocalSettings.Values[key].ToString());
+            return default(T);
         }
 
         private string GetStringValue(string key)
