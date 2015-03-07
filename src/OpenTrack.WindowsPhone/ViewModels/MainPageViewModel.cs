@@ -114,7 +114,16 @@ namespace OpenTrack.WindowsPhone.ViewModels
             _openTrackService = openTrackService;
             _settingsProvider = settingsProvider;
             _openTrackService.NewReadingEvent += NewReadingEvent;
+            _openTrackService.ExceptionEvent += ExceptionEvent;
             ReadSettings();
+        }
+
+        private void ExceptionEvent(Exception exception)
+        {
+            EnableInterface();
+
+            var messageDialog = new MessageDialog(exception.Message);
+            messageDialog.ShowAsync();
         }
 
         private void NewReadingEvent(InclinometerReading reading)

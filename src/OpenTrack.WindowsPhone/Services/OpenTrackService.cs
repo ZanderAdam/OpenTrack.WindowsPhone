@@ -9,11 +9,14 @@ using Windows.UI.Xaml;
 namespace OpenTrack.WindowsPhone.Services
 {
     public delegate void NewReadingEventHandler(InclinometerReading reading);
+    public delegate void ExceptionHandler(Exception exception);
 
     public class OpenTrackService
     {
         private readonly DispatcherTimer _timer;
         public event NewReadingEventHandler NewReadingEvent;
+        public event ExceptionHandler ExceptionEvent;
+
         private readonly SensorReadingService _sensorReadingService;
         private string _ipAddress;
         private string _port;
@@ -50,14 +53,25 @@ namespace OpenTrack.WindowsPhone.Services
 
         private async void SendMessage(InclinometerReading newSensorReading)
         {
-            var socket = new DatagramSocket();
-
-            var message = BuildMessage(newSensorReading);
-
-            using (var stream = await socket.GetOutputStreamAsync(new HostName(_ipAddress), _port))
+            try
             {
-                await stream.WriteAsync(message.AsBuffer());
-                await stream.FlushAsync();
+                _timer.Stop();
+
+                var socket = new DatagramSocket();
+
+                var message = BuildMessage(newSensorReading);
+
+                using (var stream = await socket.GetOutputStreamAsync(new HostName(_ipAddress), _port))
+                {
+                    await stream.WriteAsync(message.AsBuffer());
+                    await stream.FlushAsync();
+                }
+
+                _timer.Start();
+            }
+            catch (Exception ex)
+            {
+                ExceptionEvent(ex);
             }
         }
 
