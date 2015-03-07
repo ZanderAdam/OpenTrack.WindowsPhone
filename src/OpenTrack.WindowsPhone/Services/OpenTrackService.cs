@@ -1,36 +1,40 @@
 ﻿using System;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Devices.Sensors;
 using Windows.Networking;
 using Windows.Networking.Sockets;
 using Windows.UI.Xaml;
+using OpenTrack.WindowsPhone.Services.SensorReaders;
 
 namespace OpenTrack.WindowsPhone.Services
 {
-    public delegate void NewReadingEventHandler(InclinometerReading reading);
+    public delegate void NewReadingEventHandler(SensorReading reading);
     public delegate void ExceptionHandler(Exception exception);
 
     public class OpenTrackService
     {
         private readonly DispatcherTimer _timer;
+
         public event NewReadingEventHandler NewReadingEvent;
         public event ExceptionHandler ExceptionEvent;
 
-        private readonly SensorReadingService _sensorReadingService;
+        private readonly SensorReaderFactory _sensorReaderFactory;
+        private ISensorReadingService _sensorReadingService;
+
         private string _ipAddress;
         private string _port;
 
-        public OpenTrackService(SensorReadingService sensorReadingService)
+        public OpenTrackService(SensorReaderFactory sensorReaderFactory)
         {
-            _sensorReadingService = sensorReadingService;
-
+            _sensorReaderFactory = sensorReaderFactory;
             _timer = new DispatcherTimer();
             _timer.Tick += SendNewPosition;
         }
 
-        public void Start(string ipAddress, string port, int refreshRate)
+        public void Start(string ipAddress, string port, int refreshRate, SensorReaderType sensorReaderType)
         {
+            _sensorReadingService = _sensorReaderFactory.GetSensorReadingService(sensorReaderType);
+
             _ipAddress = ipAddress;
             _port = port;
 
@@ -46,12 +50,12 @@ namespace OpenTrack.WindowsPhone.Services
         private void SendNewPosition(object sender, object o)
         {
             var newSensorReading = _sensorReadingService.GetCurrentReading();
-            NewReadingEvent(_sensorReadingService.GetCurrentReading());
+            NewReadingEvent(newSensorReading);
 
             SendMessage(newSensorReading);
         }
 
-        private async void SendMessage(InclinometerReading newSensorReading)
+        private async void SendMessage(SensorReading newSensorReading)
         {
             try
             {
@@ -75,7 +79,7 @@ namespace OpenTrack.WindowsPhone.Services
             }
         }
 
-        private byte[] BuildMessage(InclinometerReading newSensorReading)
+        private byte[] BuildMessage(SensorReading newSensorReading)
         {
             return new double[]
             {

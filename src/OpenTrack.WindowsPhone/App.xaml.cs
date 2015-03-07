@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Controls;
 using Caliburn.Micro;
 using OpenTrack.WindowsPhone.Providers;
 using OpenTrack.WindowsPhone.Services;
+using OpenTrack.WindowsPhone.Services.SensorReaders;
 using OpenTrack.WindowsPhone.ViewModels;
 using OpenTrack.WindowsPhone.Views;
 
@@ -42,7 +43,7 @@ namespace OpenTrack.WindowsPhone
 
         private void RegisterServices()
         {
-            _container.PerRequest<SensorReadingService>();
+            _container.PerRequest<SensorReaderFactory>();
             _container.PerRequest<OpenTrackService>();
             _container.PerRequest<SettingsProvider>();
         }

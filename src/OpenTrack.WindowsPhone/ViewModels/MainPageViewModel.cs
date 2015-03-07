@@ -5,6 +5,7 @@ using Windows.UI.Xaml;
 using Caliburn.Micro;
 using OpenTrack.WindowsPhone.Providers;
 using OpenTrack.WindowsPhone.Services;
+using OpenTrack.WindowsPhone.Services.SensorReaders;
 
 namespace OpenTrack.WindowsPhone.ViewModels
 {
@@ -126,19 +127,19 @@ namespace OpenTrack.WindowsPhone.ViewModels
             messageDialog.ShowAsync();
         }
 
-        private void NewReadingEvent(InclinometerReading reading)
+        private void NewReadingEvent(SensorReading reading)
         {
             Yaw = String.Format("Yaw: {0}", reading.YawDegrees);
             Pitch = String.Format("Pitch: {0}", reading.PitchDegrees);
             Roll = String.Format("Roll: {0}", reading.RollDegrees);
-            Accuracy = String.Format("Accuracy: {0}", reading.YawAccuracy);
+            Accuracy = String.Format("Accuracy: {0}", reading.Accuracy);
         }
 
         public void StartPolling()
         {
             EnableInterface(false);
 
-            _openTrackService.Start(OpenTrackIp, OpenTrackPort, RefreshRate);
+            _openTrackService.Start(OpenTrackIp, OpenTrackPort, RefreshRate, SensorReaderType.Gyroscope);
 
             SaveSettings();
         }

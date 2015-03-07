@@ -85,8 +85,11 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Providers\SettingsProvider.cs" />
+    <Compile Include="Services\SensorReaders\ISensorReadingService.cs" />
     <Compile Include="Services\OpenTrackService.cs" />
-    <Compile Include="Services\SensorReadingService.cs" />
+    <Compile Include="Services\SensorReaders\SensorReaderFactory.cs" />
+    <Compile Include="Services\SensorReaders\SensorReading.cs" />
+    <Compile Include="Services\SensorReaders\GyroscopeReadingService.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Views\MainPageView.xaml.cs">
       <DependentUpon>MainPageView.xaml</DependentUpon>
