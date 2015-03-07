@@ -14,13 +14,13 @@
         <TextBlock Text="OpenTrack UDP Sender" Margin="0,0,0,10"/>
 
         <TextBlock Text="OpenTrack IP Address"/>
-        <TextBox x:Name="OpenTrackIp"  InputScope="Number" IsEnabled="{Binding IsInputEnabled}"/>
+        <TextBox x:Name="Settings_OpenTrackIp"  InputScope="Number" IsEnabled="{Binding IsInputEnabled}"/>
 
         <TextBlock Text="OpenTrack UDP Port"/>
-        <TextBox x:Name="OpenTrackPort"  InputScope="Number" IsEnabled="{Binding IsInputEnabled}"/>
+        <TextBox x:Name="Settings_OpenTrackPort"  InputScope="Number" IsEnabled="{Binding IsInputEnabled}"/>
 
         <TextBlock Text="Refresh Rate (ms) - Default 100"/>
-        <TextBox x:Name="RefreshRate"  InputScope="Number" IsEnabled="{Binding IsInputEnabled}"/>
+        <TextBox x:Name="Settings_RefreshRate"  InputScope="Number" IsEnabled="{Binding IsInputEnabled}"/>
 
         <Button Content="Start" HorizontalAlignment="Stretch" x:Name="StartPolling"/>
         <Button Content="Stop" HorizontalAlignment="Stretch" x:Name="EndPolling"/>

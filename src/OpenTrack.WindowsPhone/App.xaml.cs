@@ -39,6 +39,8 @@ namespace OpenTrack.WindowsPhone
         private void RegisterViewModels()
         {
             _container.PerRequest<MainPageViewModel>();
+            _container.PerRequest<SettingsViewModel>();
+            _container.PerRequest<SensorReadingViewModel>();
         }
 
         private void RegisterServices()
