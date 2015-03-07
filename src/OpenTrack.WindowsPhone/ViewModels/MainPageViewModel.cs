@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.Devices.Sensors;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Caliburn.Micro;
 using OpenTrack.WindowsPhone.Providers;
@@ -113,7 +114,6 @@ namespace OpenTrack.WindowsPhone.ViewModels
             _openTrackService = openTrackService;
             _settingsProvider = settingsProvider;
             _openTrackService.NewReadingEvent += NewReadingEvent;
-
             ReadSettings();
         }
 
@@ -127,8 +127,7 @@ namespace OpenTrack.WindowsPhone.ViewModels
 
         public void StartPolling()
         {
-            IsInputEnabled = false;
-            IsPolling = true;
+            EnableInterface(false);
 
             _openTrackService.Start(OpenTrackIp, OpenTrackPort, RefreshRate);
 
@@ -138,10 +137,15 @@ namespace OpenTrack.WindowsPhone.ViewModels
 
         public void EndPolling()
         {
-            IsInputEnabled = true;
-            IsPolling = false;
+            EnableInterface();
 
             _openTrackService.Stop();
+        }
+
+        private void EnableInterface(bool enable = true)
+        {
+            IsInputEnabled = enable;
+            IsPolling = !enable;
         }
 
         public bool CanStartPolling
