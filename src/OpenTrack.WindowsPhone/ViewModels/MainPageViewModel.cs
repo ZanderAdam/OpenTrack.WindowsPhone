@@ -18,10 +18,7 @@ namespace OpenTrack.WindowsPhone.ViewModels
         private string _openTrackIp;
         private string _openTrackPort;
         private int _refreshRate = 100;
-        private string _yaw;
-        private string _pitch;
-        private string _roll;
-        private string _accuracy;
+        private SensorReadingViewModel _sensorReadingViewModel;
 
         public bool IsInputEnabled
         {
@@ -73,40 +70,17 @@ namespace OpenTrack.WindowsPhone.ViewModels
                 NotifyOfPropertyChange(() => CanStartPolling);
             }
         }
-        public string Yaw
+
+        public SensorReadingViewModel SensorReading
         {
-            get { return _yaw; }
-            set
+            get
             {
-                _yaw = value; 
-                NotifyOfPropertyChange(() => Yaw);
+                return _sensorReadingViewModel;
             }
-        }
-        public string Pitch
-        {
-            get { return _pitch; }
             set
             {
-                _pitch = value;
-                NotifyOfPropertyChange(() => Pitch);
-            }
-        }
-        public string Roll
-        {
-            get { return _roll; }
-            set
-            {
-                _roll = value;
-                NotifyOfPropertyChange(() => Roll);
-            }
-        }
-        public string Accuracy
-        {
-            get { return _accuracy; }
-            set
-            {
-                _accuracy = value;
-                NotifyOfPropertyChange(() => Accuracy);
+                _sensorReadingViewModel = value;
+                NotifyOfPropertyChange(() => SensorReading);
             }
         }
 
@@ -115,7 +89,10 @@ namespace OpenTrack.WindowsPhone.ViewModels
             _openTrackService = openTrackService;
             _settingsProvider = settingsProvider;
             _openTrackService.NewReadingEvent += NewReadingEvent;
+
             _openTrackService.ExceptionEvent += ExceptionEvent;
+            _sensorReadingViewModel = new SensorReadingViewModel();
+
             ReadSettings();
         }
 
@@ -129,10 +106,10 @@ namespace OpenTrack.WindowsPhone.ViewModels
 
         private void NewReadingEvent(SensorReading reading)
         {
-            Yaw = String.Format("Yaw: {0}", reading.YawDegrees);
-            Pitch = String.Format("Pitch: {0}", reading.PitchDegrees);
-            Roll = String.Format("Roll: {0}", reading.RollDegrees);
-            Accuracy = String.Format("Accuracy: {0}", reading.Accuracy);
+            _sensorReadingViewModel.Yaw = String.Format("Yaw: {0}", reading.YawDegrees);
+            _sensorReadingViewModel.Pitch = String.Format("Pitch: {0}", reading.PitchDegrees);
+            _sensorReadingViewModel.Roll = String.Format("Roll: {0}", reading.RollDegrees);
+            _sensorReadingViewModel.Accuracy = String.Format("Accuracy: {0}", reading.Accuracy);
         }
 
         public void StartPolling()

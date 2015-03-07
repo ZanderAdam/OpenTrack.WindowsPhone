@@ -26,10 +26,10 @@
         <Button Content="Stop" HorizontalAlignment="Stretch" x:Name="EndPolling"/>
 
         <StackPanel Margin="0,20,0,0">
-            <TextBlock Text="{Binding Yaw}" FontSize="24"/>
-            <TextBlock Text="{Binding Pitch}" FontSize="24"/>
-            <TextBlock Text="{Binding Roll}" FontSize="24"/>
-            <TextBlock Text="{Binding Accuracy}" FontSize="24"/>
+            <TextBlock Text="{Binding SensorReading.Yaw}" FontSize="24"/>
+            <TextBlock Text="{Binding SensorReading.Pitch}" FontSize="24"/>
+            <TextBlock Text="{Binding SensorReading.Roll}" FontSize="24"/>
+            <TextBlock Text="{Binding SensorReading.Accuracy}" FontSize="24"/>
         </StackPanel>
     </StackPanel>
 </Page>
